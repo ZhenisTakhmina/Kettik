@@ -1,0 +1,108 @@
+//
+//  KTSignInViewModel.swift
+//  Kettik
+//
+//  Created by Tami on 01.05.2024.
+//
+
+import Foundation
+import RxCocoa
+import RxSwift
+import Toast
+import FirebaseAuth
+
+final class KTSignInViewModel: KTViewModel {
+    
+    @Injected(\.applicationService) private var applicationService: KTApplicationService
+    @Injected(\.authorizationService) private var authorizationService: KTAuthorizationService
+ 
+    private let observableEmail: BehaviorRelay<String?> = .init(value: nil)
+    private let observablePassword: BehaviorRelay<String?> = .init(value: nil)
+}
+
+private extension KTSignInViewModel {
+    
+    func signIn() {
+        guard 
+            let email = observableEmail.value,
+            let password = observablePassword.value,
+            !email.isEmpty,
+            !password.isEmpty
+        else {
+            show(error: "Invalid credentials.")
+            return
+        }
+        defaultLoading.accept(true)
+        
+        authorizationService.rxSignIn(email: email, password: password)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .default))
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] userId in
+                self?.getProfile(userId: userId)
+            }, onFailure: { [weak self] error in
+                guard let self = self else { return }
+                self.defaultLoading.accept(false)
+                switch (error as NSError).code {
+                case 17008: self.show(error: "Invalid email.")
+                case 17004: self.show(error: "Invalid credentials.")
+                default: self.show(error: nil)
+                }
+                
+            })
+            .disposed(by: disposeBag)
+    }
+    
+    func getProfile(userId: String) {
+        authorizationService.rxGetProfile(userId: userId)
+            .subscribe(on: ConcurrentDispatchQueueScheduler(qos: .default))
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] user in
+                self?.applicationService.handleSuccessAuthorization()
+            }, onFailure: { [weak self] error in
+                guard let self = self else { return }
+                self.defaultLoading.accept(false)
+                self.show(error: nil)
+            })
+            .disposed(by: disposeBag)
+    }
+}
+
+extension KTSignInViewModel: KTViewModelProtocol {
+    
+    struct Input {
+        
+        let email: Observable<String?>
+        let password: Observable<String?>
+        let signIn: Observable<Void>
+        let signUp: Observable<Void>
+    }
+    
+    struct Output {
+        
+    }
+    
+    @discardableResult
+    func transform(input: Input) -> Output {
+        input.email
+            .bind(to: observableEmail)
+            .disposed(by: disposeBag)
+        
+        input.password
+            .bind(to: observablePassword)
+            .disposed(by: disposeBag)
+        
+        input.signIn
+            .bind(onNext: { [unowned self] in
+                signIn()
+            })
+            .disposed(by: disposeBag)
+        
+        input.signUp
+            .map { KTSignUpScreen() }
+            .map { PushViewControllerConfiguration(controller: $0, animated: true) }
+            .bind(to: defaultPushViewController)
+            .disposed(by: disposeBag)
+        
+        return .init()
+    }
+}
