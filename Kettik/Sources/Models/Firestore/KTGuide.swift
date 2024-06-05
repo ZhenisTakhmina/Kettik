@@ -15,13 +15,15 @@ struct KTGuide: FBSnapshotInitializable {
     let photo: String?
     let role: String?
     let description: String?
+    let images: [String]?
     
-    init(id: String, name: String?, photo: String?, role: String?, description: String?) {
+    init(id: String, name: String?, photo: String?, role: String?, description: String?, images: [String]?) {
         self.id = id
         self.name = name
         self.photo = photo
         self.role = role
         self.description = description
+        self.images = images
     }
     
     init?(documentSnapshot: DocumentSnapshot?) {
@@ -31,11 +33,13 @@ struct KTGuide: FBSnapshotInitializable {
         let role: String? = documentSnapshot?.data()?["role"] as? String
         let description: String? = documentSnapshot?.data()?["description"] as? String
         let photo: String? = documentSnapshot?.data()?["photo"] as? String
+        let images: [String]? = documentSnapshot?.data()?["images"] as? [String]
         
         self.id = id
         self.name = name
         self.role = role
         self.photo = photo
         self.description = description
+        self.images = images
     }
 }

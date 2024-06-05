@@ -75,7 +75,7 @@ extension KTTripsListViewModel: KTViewModelProtocol {
             .disposed(by: disposeBag)
         
         return .init(
-            name: .just(collection.name),
+            name: .just(collection.name[KTTripAdapter.shared] ?? ""),
             trips: observableTrips.asDriverOnErrorJustComplete()
         )
     }

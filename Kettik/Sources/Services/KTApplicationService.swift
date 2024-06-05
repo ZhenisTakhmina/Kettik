@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 final class KTApplicationService {
     
@@ -16,7 +18,16 @@ final class KTApplicationService {
     
     @MainActor func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         KTLibsProvider.configure()
+        
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return false}
+        let config = GIDConfiguration(clientID: clientID)
+        GIDSignIn.sharedInstance.configuration = config
         return true
+    }
+    
+    @MainActor func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        let handle = GIDSignIn.sharedInstance.handle(url)
+        return handle
     }
     
     func handleSceneConnection(withWindow window: UIWindow?) {

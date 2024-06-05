@@ -20,6 +20,8 @@ final class KTTripDetailsScreen: KTScrollableViewController {
     
     private let navigationView: NavigationView = .init()
     
+    private var images: [URL]? = []
+        
     private let thumbnailView: UIImageView = .init().then {
         $0.contentMode = .scaleAspectFill
         $0.clipsToBounds = true
@@ -50,11 +52,31 @@ final class KTTripDetailsScreen: KTScrollableViewController {
         $0.set(icon: KTImages.Icon.clock.image)
     }
     
+    private let guideLabel: UILabel = .init().then {
+        $0.text = "Guide: Zhenis Takhmina"
+        $0.font = KTFonts.SFProText.bold.font(size: 16)
+        $0.numberOfLines = 0
+        $0.textColor = KTColors.Text.primary.color
+    }
+    
     private let descriptionLabel: UILabel = .init().then {
         $0.font = KTFonts.SFProText.regular.font(size: 16)
         $0.numberOfLines = 0
         $0.textColor = KTColors.Text.primary.color
     }
+    
+    private lazy var collectionView: UICollectionView = {
+        let layout: UICollectionViewFlowLayout = .init()
+        layout.minimumLineSpacing = 15
+        layout.scrollDirection = .horizontal
+        let view: UICollectionView = .init(frame: .zero, collectionViewLayout: layout)
+        view.backgroundColor = .clear
+        view.showsHorizontalScrollIndicator = false
+        view.register(ImagesCell.self)
+        view.dataSource = self
+        view.delegate = self
+        return view
+    }()
     
     private let footerView: KTTripDetailsFooterView = .init()
     
@@ -94,12 +116,13 @@ final class KTTripDetailsScreen: KTScrollableViewController {
         
         output.displayTrip
             .drive(onNext: { [unowned self] trip in
+                images = trip.imagesURL
                 thumbnailView.setImage(with: trip.thumbnailURL)
-                nameLabel.text = trip.name
-                descriptionLabel.text = trip.description
-                locationView.set(text: trip.location)
+                nameLabel.text = trip.name?[KTTripAdapter.shared]
+                descriptionLabel.text = trip.description?[KTTripAdapter.shared]
+                locationView.set(text: trip.location?[KTTripAdapter.shared])
                 dateView.set(text: trip.date)
-                durationView.set(text: trip.duration)
+                durationView.set(text: trip.duration?[KTTripAdapter.shared])
                 if let difficulty = trip.difficulty {
                     difficultyView.set(difficulty: difficulty)
                     difficultyView.isHidden = false
@@ -121,6 +144,7 @@ final class KTTripDetailsScreen: KTScrollableViewController {
 private extension KTTripDetailsScreen {
     
     func setupContent() {
+        
         let headerView: UIImageView = .init(image: KTImages.Element.tripDetailsHeader.image).then {
             $0.contentMode = .scaleToFill
         }
@@ -137,7 +161,7 @@ private extension KTTripDetailsScreen {
             UIView()
         ]).then {
             $0.alignment = .center
-            $0.spacing = 20
+            $0.spacing = 15
         }
         
         let stackView: UIStackView = .init(arrangedSubviews: [
@@ -146,8 +170,11 @@ private extension KTTripDetailsScreen {
             locationView,
             descriptionTitleLabel,
             descriptionLabel,
+            guideLabel,
+            collectionView
         ]).then {
             $0.axis = .vertical
+            $0.spacing = 15
             $0.setCustomSpacing(12, after: nameLabel)
             $0.setCustomSpacing(24, after: locationView)
             $0.setCustomSpacing(14, after: dateView)
@@ -175,11 +202,40 @@ private extension KTTripDetailsScreen {
         }
         
         contentView.add(stackView, {
-            $0.edges.equalTo(UIEdgeInsets(horizontal: 24, vertical: 12))
+            $0.edges.equalTo(UIEdgeInsets(horizontal: 20, vertical: 12))
         })
         difficultyView.snp.makeConstraints {
             $0.size.equalTo(CGSize(width: 84, height: 32))
         }
+        collectionView.snp.makeConstraints {
+            $0.height.equalTo(150)
+        }
+    }
+}
+
+extension KTTripDetailsScreen: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: ImagesCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        let image = images?[indexPath.item]
+        cell.set(image: image)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 200, height: 150)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedImage = images?[indexPath.item]
+        let fullScreenImageView = KTFullScreenImageViewController()
+        fullScreenImageView.setImage(selectedImage)
+        fullScreenImageView.modalPresentationStyle = .overFullScreen
+        present(fullScreenImageView, animated: true)
     }
 }
 
@@ -226,44 +282,39 @@ fileprivate final class NavigationView: KTView {
     }
 }
 
+fileprivate final class ImagesCell: KTCollectionViewCell {
+    
+    private let imagesView: KTImagesCellView = .init()
+    
+    override func setupViews() {
+        super.setupViews()
+        contentView.add(imagesView, {
+            $0.edges.equalToSuperview()
+
+        })
+    }
+    
+    func set(image: URL?) {
+        imagesView.set(image: image)
+    }
+}
+
 struct KTTripDetailsScreenPreview: PreviewProvider {
     
     static var previews: some View {
-        KTPreview {
-            let description: String = """
-            🏞 Suitable for everyone in average physical shape and little hiking experience
-
-            ☑ Take with you:
-            - Snack
-            - A bottle of water
-            - Money just in case
-            - Thermos with tea
-            - Personal mug
-            - Personal waste collection bag
-            - Trekking sticks
-
-            👕How to dress?
-            - comfortable sportswear
-            - trekking shoes
-            - warm jacket and windbreaker
-            - raincoat
-            - sunscreen and glasses
-            - headdress and buff
-
-            Trip guide: Alexey
-            """
-            
+        KTPreview {            
             return KTTripDetailsScreen(viewModel: .init(trip: .init(
                 id: "1",
-                name: "Test trip",
-                description: description,
-                thumbnailURL: URL(string: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/02/54/1b/big-almaty-lake-at-a.jpg?w=1200&h=-1&s=1"),
-                location: "Almaty/KZ",
+                name: ["test": "test"],
+                description: ["big lake":"Big lake"],
+                thumbnailURL: URL(string: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/18/02/54/1b/big-almaty-lake-at-a.jpg?w=1200&h=-1&s=1"), 
+                imagesURL: [],
+                location: nil,
                 price: 1234,
                 formattedPrice: "1234",
                 difficulty: .medium, 
-                date: "7 May", 
-                duration: "7-8 hours/6 km"
+                date: "07.05.2023",
+                duration: ["big lake":"Big lake"]
             )))
         }.edgesIgnoringSafeArea(.all)
     }

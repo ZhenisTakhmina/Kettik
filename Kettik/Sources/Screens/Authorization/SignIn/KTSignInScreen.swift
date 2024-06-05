@@ -8,19 +8,22 @@
 import UIKit
 import SwiftUI
 import IQKeyboardManagerSwift
+import GoogleSignIn
+import FirebaseAuth
 
 final class KTSignInScreen: KTViewController {
     
     override var navigationBarStyle: KTViewController.NavigationBarStyle {
         .transparent(configuration: .init())
     }
-    
     private let viewModel: KTSignInViewModel = .init()
     
     private let emailView: KTEmailInputView = .init()
     private let passwordView: KTPasswordInputView = .init()
     
     private let loginButton: KTPrimaryButton = .init(title: KTStrings.Auth.logIn)
+    
+    private let googleButton: KTGoogleButton = .init(title: "  Continue with Google")
     
     private let resetButton: UIButton = .init(type: .system).then {
         $0.setTitle(KTStrings.Auth.fogotPassword, for: .normal)
@@ -36,7 +39,6 @@ final class KTSignInScreen: KTViewController {
     
     override func setupViews() {
         super.setupViews()
-        
         let stackView: UIStackView = .init(arrangedSubviews: [
             UILabel().then {
                 $0.text = KTStrings.Auth.title
@@ -68,6 +70,7 @@ final class KTSignInScreen: KTViewController {
             },
             
             loginButton,
+            googleButton,
             
             UIStackView(arrangedSubviews: [
                 UIStackView(arrangedSubviews: [
@@ -88,6 +91,7 @@ final class KTSignInScreen: KTViewController {
         ]).then {
             $0.axis = .vertical
             $0.spacing = 44
+            $0.setCustomSpacing(24, after: loginButton)
         }
         
         view.add(stackView, {
@@ -104,7 +108,8 @@ final class KTSignInScreen: KTViewController {
             email: emailView.textField.rx.text.asObservable(),
             password: passwordView.textField.rx.text.asObservable(),
             signIn: loginButton.rx.tap.mapToVoid(),
-            signUp: signUpButton.rx.tap.mapToVoid()
+            signUp: signUpButton.rx.tap.mapToVoid(),
+            googleSignIn: googleButton.rx.tap.mapToVoid()
         )
         viewModel.transform(input: input)
     }

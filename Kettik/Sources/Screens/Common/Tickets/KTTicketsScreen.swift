@@ -118,7 +118,7 @@ fileprivate final class Cell: KTTableViewCell {
     }
     
     func set(ticket: KTTicketAdapter) {
-        countLabel.text = "\(ticket.count) ticket"
+        countLabel.text = String(ticket.count) + KTStrings.Ticket.ticket
         nameLabel.text = ticket.name
         priceLabel.text = ticket.formattedTotalPrice
     }

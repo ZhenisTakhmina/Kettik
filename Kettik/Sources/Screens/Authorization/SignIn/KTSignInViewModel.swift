@@ -10,6 +10,8 @@ import RxCocoa
 import RxSwift
 import Toast
 import FirebaseAuth
+import UIKit
+import GoogleSignIn
 
 final class KTSignInViewModel: KTViewModel {
     
@@ -20,7 +22,20 @@ final class KTSignInViewModel: KTViewModel {
     private let observablePassword: BehaviorRelay<String?> = .init(value: nil)
 }
 
-private extension KTSignInViewModel {
+ extension KTSignInViewModel {
+    
+    func signInWithGoogle() {
+        guard let presentingVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first?.rootViewController else {return}
+        authorizationService.rxConfigureGoogleSignIn(from: presentingVC)
+            .observe(on: MainScheduler.instance)
+            .subscribe(onSuccess: { [weak self] userID in
+                self?.getProfile(userId: userID)
+            },onFailure: { [weak self] error in
+                guard let self = self else { return }
+                self.show(error: error.localizedDescription)
+            })
+            .disposed(by: disposeBag)
+    }
     
     func signIn() {
         guard 
@@ -75,6 +90,7 @@ extension KTSignInViewModel: KTViewModelProtocol {
         let password: Observable<String?>
         let signIn: Observable<Void>
         let signUp: Observable<Void>
+        let googleSignIn: Observable<Void>
     }
     
     struct Output {
@@ -101,6 +117,12 @@ extension KTSignInViewModel: KTViewModelProtocol {
             .map { KTSignUpScreen() }
             .map { PushViewControllerConfiguration(controller: $0, animated: true) }
             .bind(to: defaultPushViewController)
+            .disposed(by: disposeBag)
+        
+        input.googleSignIn
+            .bind(onNext: { [unowned self] in
+                signInWithGoogle()
+            })
             .disposed(by: disposeBag)
         
         return .init()

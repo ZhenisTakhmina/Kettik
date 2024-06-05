@@ -15,6 +15,9 @@ struct KTTicket: FBSnapshotInitializable {
     let name: String
     let totalPrice: Int
     let count: Int
+    let purchaseDate: Date
+    let status: String
+
     
     init?(documentSnapshot: DocumentSnapshot?) {
         guard 
@@ -22,7 +25,10 @@ struct KTTicket: FBSnapshotInitializable {
             let tripId = documentSnapshot?.data()?["trip_id"] as? String,
             let name = documentSnapshot?.data()?["name"] as? String,
             let totalPrice = documentSnapshot?.data()?["total_price"] as? Int,
-            let count = documentSnapshot?.data()?["count"] as? Int
+            let count = documentSnapshot?.data()?["count"] as? Int,
+            let purchaseDate = documentSnapshot?.data()?["purchase_date"] as? Timestamp,
+            let status = documentSnapshot?.data()?["status"] as? String
+
         else { return nil }
         
         self.id = id
@@ -30,5 +36,7 @@ struct KTTicket: FBSnapshotInitializable {
         self.name = name
         self.totalPrice = totalPrice
         self.count = count
+        self.purchaseDate = purchaseDate.dateValue()
+        self.status = status
     }
 }

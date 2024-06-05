@@ -70,6 +70,8 @@ extension KTUsersService {
     }
     
     func rxBuyTickets(
+        name: String,
+        phoneNumber: String,
         count: Int,
         totalPrice: Int,
         trip: KTTripAdapter
@@ -88,10 +90,14 @@ extension KTUsersService {
             
             document
                 .setData([
+                        "full_name": name,
+                        "phone_number": phoneNumber,
                         "trip_id": trip.id,
                         "total_price": totalPrice,
                         "count": count,
-                        "name": trip.name ?? "-",
+                        "status": "В обработке",
+                        "paymentStatus": "Ожидает оплаты",
+                        "name": trip.name?[KTTripAdapter.shared] ?? "-",
                         "purchase_date": Timestamp(date: .init())
                     ]) { error in
                         if let error = error {
@@ -100,9 +106,11 @@ extension KTUsersService {
                             single(.success(.init(
                                 id: document.documentID,
                                 tripId: trip.id,
-                                name: trip.name ?? "-",
+                                name: trip.name?[KTTripAdapter.shared] ?? "-",
                                 formattedTotalPrice: totalPrice.kztFormatted,
-                                count: count
+                                count: count,
+                                purchaseDate: Date(),
+                                status: "pending"
                             )))
                         }
                     }

@@ -28,6 +28,7 @@ public enum KTColors {
   }
   public enum Status {
     public static let success = ColorAsset(name: "Status/success")
+    public static let pending = ColorAsset(name: "Status/pending")
   }
   public enum Surface {
     public static let primary = ColorAsset(name: "Surface/primary")

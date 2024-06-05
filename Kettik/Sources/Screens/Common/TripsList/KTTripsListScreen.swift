@@ -116,7 +116,7 @@ struct KTTripsListScreenPreview: PreviewProvider {
     
     static var previews: some View {
         KTPreview {
-            KTNavigationController(rootViewController: KTTripsListScreen(viewModel: .init(collection: .init(id: "1", name: "Welcome to Almaty", trips: ["DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU"], sortIndex: 0, style: .list))))
+            KTNavigationController(rootViewController: KTTripsListScreen(viewModel: .init(collection: .init(id: "1", name: [:], trips: ["DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU"], sortIndex: 0, style: .list))))
         }.edgesIgnoringSafeArea(.all)
     }
 }

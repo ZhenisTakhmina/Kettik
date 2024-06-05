@@ -34,6 +34,8 @@
 "tab.profile" = "Profile";
 
 "explore.title" = "Welcome to Almaty!";
+"explore.searchText" = "Search text";
+
 "trip.slash_person" = "/ person";
 "trip.about_tour" = "About tour";
 "trip.total_price" = "Total Price";
@@ -49,3 +51,15 @@
 "profile.faq" = "Question & Answers";
 "profile.social_media_title" = "We are in social media :)";
 "profile.sign_out" = "Sign Out";
+"profile.save" = "Save";
+
+"ticket.date" = "DATE";
+"ticket.count" = "COUNT";
+"ticket.trip" = "TRIP";
+"ticket.price" = "PRICE";
+"ticket.ticket" = " ticket";
+"ticket.make_purchase" = "Make purchase";
+"ticket.pending" = "Pending";
+"ticket.purchased" = "Purchased";
+"ticket.status" = "STATUS";
+"ticket.invalid" = "Invalid";

@@ -6,6 +6,7 @@
 //
 
 import FirebaseAuth
+import GoogleSignIn
 import RxCocoa
 import RxSwift
 
@@ -20,6 +21,8 @@ final class KTAuthorizationService: KTFirebaseServiceType {
     }
     
     private(set) var currentUserProfile: KTUser?
+    
+    private let controller: KTSignInScreen? = nil
     
     private let disposeBag: DisposeBag = .init()
     
@@ -70,6 +73,32 @@ extension KTAuthorizationService {
                 }
             }
             
+            return Disposables.create()
+        }
+    }
+    
+    func rxConfigureGoogleSignIn(from controller: UIViewController) -> Single<String> {
+        Single<String>.create { single in
+            GIDSignIn.sharedInstance.signIn(withPresenting: controller) {result, error in
+                if let error = error {
+                    single(.failure(error))
+                }
+                guard let user = result?.user, let idToken = user.idToken else {
+                    single(.failure(NSError(domain: "GoogleSignInError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to get user or idToken"])))
+                    return
+                }
+                let credentials = GoogleAuthProvider.credential(withIDToken: idToken.tokenString, accessToken: user.accessToken.tokenString)
+                
+                Auth.auth().signIn(with: credentials) { authResult, signInError in
+                    if let signInError = signInError {
+                        single(.failure(signInError))
+                    } else if let id = authResult?.user.uid {
+                        single(.success(id))
+                    } else {
+                        single(.failure(NSError(domain: "FirebaseAuthError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to get user ID"])))
+                    }
+                }
+            }
             return Disposables.create()
         }
     }

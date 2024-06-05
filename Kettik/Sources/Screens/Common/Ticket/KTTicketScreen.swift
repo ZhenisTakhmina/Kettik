@@ -27,10 +27,11 @@ final class KTTicketScreen: KTViewController {
     
     private let backButton: KTImageButton = .init(image: KTImages.Control.backNavBar.image)
     
-    private let titleView: KTTicketKeyValueView = .init(title: "TRIP")
-    private let priceView: KTTicketKeyValueView = .init(title: "PRICE")
-    private let countView: KTTicketKeyValueView = .init(title: "COUNT")
-    private let dateView: KTTicketKeyValueView = .init(title: "DATE")
+    private let titleView: KTTicketKeyValueView = .init(title: KTStrings.Ticket.trip)
+    private let priceView: KTTicketKeyValueView = .init(title: KTStrings.Ticket.price)
+    private let countView: KTTicketKeyValueView = .init(title: KTStrings.Ticket.count)
+    private let dateView: KTTicketKeyValueView = .init(title: KTStrings.Ticket.date)
+    private let statusView: KTTicketKeyValueView = .init(title: KTStrings.Ticket.status)
     
     init(ticket: KTTicketAdapter) {
         self.ticket = ticket
@@ -42,7 +43,8 @@ final class KTTicketScreen: KTViewController {
         titleView.set(value: ticket.name)
         priceView.set(value: ticket.formattedTotalPrice)
         countView.set(value: "\(ticket.count)")
-        dateView.set(value: "7 May")
+        dateView.set(value: "\(ticket.purchaseDate)")
+        updateTicketStatusUI(status: TicketStatus(rawValue: ticket.status) ?? .pending)
     }
     
     override func setupViews() {
@@ -69,6 +71,7 @@ final class KTTicketScreen: KTViewController {
         })
         
         let infoStackView: UIStackView = .init(arrangedSubviews: [
+            statusView,
             titleView,
             priceView,
             countView,
@@ -118,14 +121,20 @@ private extension KTTicketScreen {
             self.ticketView.transform = .identity
         })
     }
-}
-
-
-struct KTTicketScreenPreview: PreviewProvider {
     
-    static var previews: some View {
-        KTPreview {
-            KTTicketScreen(ticket: .init(id: "1", tripId: "1", name: "Test Trip", formattedTotalPrice: "12 000", count: 4))
-        }.edgesIgnoringSafeArea(.all)
+    func updateTicketStatusUI(status: TicketStatus){
+        statusView.set(value: status.info.statusText)
+        statusView.valueLabel.textColor = status.info.textColor
+        qrView.image = status.info.image
     }
 }
+
+
+//struct KTTicketScreenPreview: PreviewProvider {
+//    
+//    static var previews: some View {
+//        KTPreview {
+//            KTTicketScreen(ticket: .init(id: "1", tripId: "1", name: "Test Trip", formattedTotalPrice: "12 000", count: 4, purchaseDate: ))
+//        }.edgesIgnoringSafeArea(.all)
+//    }
+//}

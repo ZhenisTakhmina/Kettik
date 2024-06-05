@@ -2,7 +2,7 @@
 //  KTInputView.swift
 //  Kettik
 //
-//  Created by Ruslan on 01.05.2024.
+//  Created by Tami on 01.05.2024.
 //
 
 import UIKit

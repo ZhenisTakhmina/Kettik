@@ -9,7 +9,7 @@ import UIKit
 
 final class KTTicketKeyValueView: KTView {
     
-    private let valueLabel: UILabel = .init().then {
+    let valueLabel: UILabel = .init().then {
         $0.font = KTFonts.SFProText.bold.font(size: 16)
         $0.textColor = KTColors.Text.primary.color
         $0.text = "-"

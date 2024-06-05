@@ -71,7 +71,7 @@ extension KTHorizontalTripsViewModel: KTViewModelProtocol {
     func transform(input: Input) -> Output {
         
         return .init(
-            name: .just(collection.name),
+            name: .just(collection.name[KTTripAdapter.shared] ?? ""),
             style: .just(collection.style),
             trips: observableTrips.asDriverOnErrorJustComplete()
         )

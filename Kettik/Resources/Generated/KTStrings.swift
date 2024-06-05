@@ -60,6 +60,8 @@ public enum KTStrings {
   public enum Explore {
     /// Welcome to Almaty!
     public static let title = KTStrings.tr("Localizable", "explore.title")
+    /// search text
+    public static let searchText = KTStrings.tr("Localizable", "explore.searchText")
   }
 
   public enum Profile {
@@ -77,6 +79,9 @@ public enum KTStrings {
     public static let signOut = KTStrings.tr("Localizable", "profile.sign_out")
     /// We are in social media :)
     public static let socialMediaTitle = KTStrings.tr("Localizable", "profile.social_media_title")
+    /// Save
+    public static let save = KTStrings.tr("Localizable", "profile.save")
+
   }
 
   public enum Tab {
@@ -99,6 +104,7 @@ public enum KTStrings {
     public static let slashPerson = KTStrings.tr("Localizable", "trip.slash_person")
     /// Total Price
     public static let totalPrice = KTStrings.tr("Localizable", "trip.total_price")
+      
     public enum Difficulty {
       /// Easy
       public static let easy = KTStrings.tr("Localizable", "trip.difficulty.easy")
@@ -108,6 +114,31 @@ public enum KTStrings {
       public static let medium = KTStrings.tr("Localizable", "trip.difficulty.medium")
     }
   }
+    
+    public enum Ticket {
+    /// date
+    public static let date = KTStrings.tr("Localizable", "ticket.date")
+    /// count
+    public static let count = KTStrings.tr("Localizable", "ticket.count")
+    /// price
+    public static let price = KTStrings.tr("Localizable", "ticket.price")
+    /// trip
+    public static let trip = KTStrings.tr("Localizable", "ticket.trip")
+    /// ticket
+    public static let ticket = KTStrings.tr("Localizable", "ticket.ticket")
+    /// Make purchase
+    public static let makePurchase = KTStrings.tr("Localizable", "ticket.make_purchase")
+    /// Purchased
+    public static let purchased = KTStrings.tr("Localizable", "ticket.purchased")
+    /// Pending
+    public static let pending = KTStrings.tr("Localizable", "ticket.pending")
+    /// status
+    public static let status = KTStrings.tr("Localizable", "ticket.status")
+    /// invalid
+    public static let invalid = KTStrings.tr("Localizable", "ticket.invalid")
+
+
+    }
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces

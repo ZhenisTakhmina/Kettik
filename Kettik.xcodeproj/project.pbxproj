@@ -10,6 +10,13 @@
 		271215452BE4CC3E006BE61C /* KTAccordionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271215442BE4CC3E006BE61C /* KTAccordionView.swift */; };
 		271215482BE4CC95006BE61C /* KTPRofileSettingsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271215472BE4CC95006BE61C /* KTPRofileSettingsScreen.swift */; };
 		2712154A2BE4CCB6006BE61C /* KTPRofileSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 271215492BE4CCB6006BE61C /* KTPRofileSettingsViewModel.swift */; };
+		274729A52BEFA5EC00026129 /* KTImagesCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274729A42BEFA5EC00026129 /* KTImagesCellView.swift */; };
+		274729A72BEFB36400026129 /* KTFullScreenImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274729A62BEFB36400026129 /* KTFullScreenImageView.swift */; };
+		274729AA2BF02E2500026129 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 274729A92BF02E2500026129 /* GoogleSignIn */; };
+		274729AC2BF02E2500026129 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 274729AB2BF02E2500026129 /* GoogleSignInSwift */; };
+		274729AE2BFBC63600026129 /* KTGoogleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274729AD2BFBC63600026129 /* KTGoogleButton.swift */; };
+		274729B02BFC0C8C00026129 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 274729AF2BFC0C8B00026129 /* GoogleService-Info.plist */; };
+		27AD96052C0E1E53004B639F /* KTTicketStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AD96042C0E1E53004B639F /* KTTicketStatus.swift */; };
 		449668882BE16BAA00931A5D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449668872BE16BAA00931A5D /* AppDelegate.swift */; };
 		4496688A2BE16BAA00931A5D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449668892BE16BAA00931A5D /* SceneDelegate.swift */; };
 		4496688F2BE16BAA00931A5D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4496688D2BE16BAA00931A5D /* Main.storyboard */; };
@@ -32,7 +39,6 @@
 		449668D12BE1749A00931A5D /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 449668D02BE1749A00931A5D /* RxGesture */; };
 		449668D42BE174A700931A5D /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 449668D32BE174A700931A5D /* Then */; };
 		449668D72BE1750E00931A5D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 449668D62BE1750E00931A5D /* Kingfisher */; };
-		449668D92BE175F600931A5D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 449668D82BE175F600931A5D /* GoogleService-Info.plist */; };
 		449668DC2BE1895000931A5D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 449668DB2BE1895000931A5D /* FirebaseAuth */; };
 		449668DE2BE1895000931A5D /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 449668DD2BE1895000931A5D /* FirebaseDatabaseSwift */; };
 		449668E02BE1895000931A5D /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 449668DF2BE1895000931A5D /* FirebaseFirestoreSwift */; };
@@ -132,6 +138,11 @@
 		271215442BE4CC3E006BE61C /* KTAccordionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTAccordionView.swift; sourceTree = "<group>"; };
 		271215472BE4CC95006BE61C /* KTPRofileSettingsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTPRofileSettingsScreen.swift; sourceTree = "<group>"; };
 		271215492BE4CCB6006BE61C /* KTPRofileSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTPRofileSettingsViewModel.swift; sourceTree = "<group>"; };
+		274729A42BEFA5EC00026129 /* KTImagesCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTImagesCellView.swift; sourceTree = "<group>"; };
+		274729A62BEFB36400026129 /* KTFullScreenImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTFullScreenImageView.swift; sourceTree = "<group>"; };
+		274729AD2BFBC63600026129 /* KTGoogleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTGoogleButton.swift; sourceTree = "<group>"; };
+		274729AF2BFC0C8B00026129 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		27AD96042C0E1E53004B639F /* KTTicketStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTTicketStatus.swift; sourceTree = "<group>"; };
 		449668842BE16BAA00931A5D /* Kettik.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kettik.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		449668872BE16BAA00931A5D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		449668892BE16BAA00931A5D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,7 +160,6 @@
 		449668B92BE172F300931A5D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		449668BA2BE1730600931A5D /* kk-KZ */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "kk-KZ"; path = "kk-KZ.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		449668BB2BE1733700931A5D /* KTStrings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KTStrings.swift; sourceTree = "<group>"; };
-		449668D82BE175F600931A5D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		449668E52BE18A3800931A5D /* KTApplicationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTApplicationService.swift; sourceTree = "<group>"; };
 		449668E72BE18A8800931A5D /* KTLibsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KTLibsProvider.swift; sourceTree = "<group>"; };
 		449668EA2BE18BDF00931A5D /* Injected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
@@ -248,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				449668CB2BE1741C00931A5D /* IQKeyboardManagerSwift in Frameworks */,
+				274729AA2BF02E2500026129 /* GoogleSignIn in Frameworks */,
 				449668DC2BE1895000931A5D /* FirebaseAuth in Frameworks */,
 				449668C62BE1740F00931A5D /* RxRelay in Frameworks */,
 				44C45DDF2BE28DFD0097EDA0 /* Toast in Frameworks */,
@@ -255,6 +266,7 @@
 				449668D72BE1750E00931A5D /* Kingfisher in Frameworks */,
 				449668D42BE174A700931A5D /* Then in Frameworks */,
 				449668CE2BE1742800931A5D /* SnapKit in Frameworks */,
+				274729AC2BF02E2500026129 /* GoogleSignInSwift in Frameworks */,
 				449668C82BE1740F00931A5D /* RxSwift in Frameworks */,
 				449668DE2BE1895000931A5D /* FirebaseDatabaseSwift in Frameworks */,
 				449668C22BE1740F00931A5D /* RxBlocking in Frameworks */,
@@ -320,7 +332,7 @@
 			children = (
 				449668872BE16BAA00931A5D /* AppDelegate.swift */,
 				449668892BE16BAA00931A5D /* SceneDelegate.swift */,
-				449668D82BE175F600931A5D /* GoogleService-Info.plist */,
+				274729AF2BFC0C8B00026129 /* GoogleService-Info.plist */,
 				449668952BE16BAB00931A5D /* Info.plist */,
 			);
 			path = Application;
@@ -387,6 +399,8 @@
 				449669242BE19B3B00931A5D /* HorizontalTrips */,
 				449669102BE1942F00931A5D /* KTSpinnerView.swift */,
 				271215442BE4CC3E006BE61C /* KTAccordionView.swift */,
+				274729A42BEFA5EC00026129 /* KTImagesCellView.swift */,
+				274729A62BEFB36400026129 /* KTFullScreenImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -550,6 +564,7 @@
 				4496695D2BE2559B00931A5D /* KTPrimaryButton.swift */,
 				449669182BE1998600931A5D /* KTImageButton.swift */,
 				4496692E2BE19E0600931A5D /* KTViewAllButton.swift */,
+				274729AD2BFBC63600026129 /* KTGoogleButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -633,6 +648,7 @@
 				44C45DFB2BE2D1EB0097EDA0 /* KTGuide.swift */,
 				449669322BE19F9C00931A5D /* KTTripsCollection.swift */,
 				44C45E2C2BE410B30097EDA0 /* KTTicket.swift */,
+				27AD96042C0E1E53004B639F /* KTTicketStatus.swift */,
 			);
 			path = Firestore;
 			sourceTree = "<group>";
@@ -784,6 +800,8 @@
 				449668DF2BE1895000931A5D /* FirebaseFirestoreSwift */,
 				449668E12BE1895000931A5D /* FirebaseRemoteConfigSwift */,
 				44C45DDE2BE28DFD0097EDA0 /* Toast */,
+				274729A92BF02E2500026129 /* GoogleSignIn */,
+				274729AB2BF02E2500026129 /* GoogleSignInSwift */,
 			);
 			productName = Kettik;
 			productReference = 449668842BE16BAA00931A5D /* Kettik.app */;
@@ -824,6 +842,7 @@
 				449668D52BE1750E00931A5D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				449668DA2BE1895000931A5D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				44C45DDD2BE28DFD0097EDA0 /* XCRemoteSwiftPackageReference "toast-swift" */,
+				274729A82BF02E2500026129 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
 			productRefGroup = 449668852BE16BAA00931A5D /* Products */;
 			projectDirPath = "";
@@ -839,6 +858,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274729B02BFC0C8C00026129 /* GoogleService-Info.plist in Resources */,
 				449668B02BE1714C00931A5D /* Localizable.strings in Resources */,
 				4496691F2BE19AF200931A5D /* SF-Pro-Text-Bold.otf in Resources */,
 				449668942BE16BAB00931A5D /* LaunchScreen.storyboard in Resources */,
@@ -848,7 +868,6 @@
 				449669222BE19AF200931A5D /* SF-Pro-Text-Regular.otf in Resources */,
 				44C45E1C2BE3BCD20097EDA0 /* SF-Pro-Text-Heavy.otf in Resources */,
 				4496688F2BE16BAA00931A5D /* Main.storyboard in Resources */,
-				449668D92BE175F600931A5D /* GoogleService-Info.plist in Resources */,
 				449669212BE19AF200931A5D /* SF-Pro-Text-Medium.otf in Resources */,
 				449669232BE19AF200931A5D /* SF-Pro-Text-Thin.otf in Resources */,
 			);
@@ -910,6 +929,7 @@
 				449669352BE1A21E00931A5D /* KTExploreViewModel.swift in Sources */,
 				449669262BE19B4D00931A5D /* KTHorizontalTripsView.swift in Sources */,
 				44C45E162BE3A9810097EDA0 /* KTOrderScreen.swift in Sources */,
+				274729AE2BFBC63600026129 /* KTGoogleButton.swift in Sources */,
 				449668F52BE18E2700931A5D /* KTNavigationController.swift in Sources */,
 				449669192BE1998600931A5D /* KTImageButton.swift in Sources */,
 				44C45DF22BE2C63E0097EDA0 /* KTTripsListViewModel.swift in Sources */,
@@ -947,6 +967,7 @@
 				449668F32BE18C7000931A5D /* KTDataService.swift in Sources */,
 				449669392BE1A7B600931A5D /* KTTripDetailsScreen.swift in Sources */,
 				449669312BE19F5600931A5D /* KTExploreTripsView.swift in Sources */,
+				274729A72BEFB36400026129 /* KTFullScreenImageView.swift in Sources */,
 				44C45E2B2BE40D380097EDA0 /* KTTicketKeyValueView.swift in Sources */,
 				44C45E002BE2D40A0097EDA0 /* KTGuidesService.swift in Sources */,
 				4496694D2BE2375800931A5D /* RxViewController.swift in Sources */,
@@ -955,9 +976,11 @@
 				4496692F2BE19E0600931A5D /* KTViewAllButton.swift in Sources */,
 				44C45DFA2BE2D1860097EDA0 /* KTGuideAdapter.swift in Sources */,
 				449669532BE24EB900931A5D /* KTAuthorizationService.swift in Sources */,
+				27AD96052C0E1E53004B639F /* KTTicketStatus.swift in Sources */,
 				44C45E292BE3E2700097EDA0 /* KTTicketScreen.swift in Sources */,
 				449668E62BE18A3800931A5D /* KTApplicationService.swift in Sources */,
 				449668882BE16BAA00931A5D /* AppDelegate.swift in Sources */,
+				274729A52BEFA5EC00026129 /* KTImagesCellView.swift in Sources */,
 				44C45DF82BE2CF940097EDA0 /* KTGuidesScreen.swift in Sources */,
 				449669462BE224C100931A5D /* KTTripsCollectionsService.swift in Sources */,
 				44C45DE72BE2A52A0097EDA0 /* KTProfileScreen.swift in Sources */,
@@ -1237,6 +1260,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		274729A82BF02E2500026129 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.0;
+			};
+		};
 		449668C02BE1740F00931A5D /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
@@ -1304,6 +1335,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		274729A92BF02E2500026129 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 274729A82BF02E2500026129 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		274729AB2BF02E2500026129 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 274729A82BF02E2500026129 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
 		449668C12BE1740F00931A5D /* RxBlocking */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 449668C02BE1740F00931A5D /* XCRemoteSwiftPackageReference "RxSwift" */;

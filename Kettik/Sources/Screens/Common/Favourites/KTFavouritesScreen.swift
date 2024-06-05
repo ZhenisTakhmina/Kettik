@@ -138,8 +138,8 @@ fileprivate final class Cell: KTTableViewCell {
     
     func set(trip: KTTripAdapter) {
         photoView.setImage(with: trip.thumbnailURL)
-        nameLabel.text = trip.name
+        nameLabel.text = trip.name?[KTTripAdapter.shared]
         priceLabel.text = trip.formattedPrice
-        locationView.set(text: trip.location)
+        locationView.set(text: trip.location?[KTTripAdapter.shared])
     }
 }

@@ -38,6 +38,9 @@ public enum KTImages {
   }
   public enum Element {
     public static let blackGradient = ImageAsset(name: "Element/black_gradient")
+    public static let verifiedQR = ImageAsset(name: "Element/qr1")
+    public static let pendingQR = ImageAsset(name: "Element/qr2")
+    public static let invalidQR = ImageAsset(name: "Element/qr3")
     public static let fullTicket = ImageAsset(name: "Element/full_ticket")
     public static let ticket = ImageAsset(name: "Element/ticket")
     public static let tripDetailsHeader = ImageAsset(name: "Element/trip_details_header")
@@ -62,6 +65,7 @@ public enum KTImages {
     public static let faq = ImageAsset(name: "Profile/faq")
     public static let favorites = ImageAsset(name: "Profile/heart")
     public static let instagram = ImageAsset(name: "Profile/instagram")
+    public static let google = ImageAsset(name: "Profile/google")
     public static let language = ImageAsset(name: "Profile/language")
     public static let myProfile = ImageAsset(name: "Profile/my_profile")
     public static let myTickets = ImageAsset(name: "Profile/my_tickets")

@@ -14,10 +14,11 @@ final class KTOrderViewModel: KTViewModel {
     private let usersService: KTUsersService = .init()
     
     private let trip: KTTripAdapter
-    
+    private let observableName: BehaviorRelay<String?> = .init(value: nil)
+    private let observablePhoneNumber: BehaviorRelay<String?> = .init(value: nil)
     private let totalCount: BehaviorRelay<Int> = .init(value: 1)
     private lazy var totalPrice: BehaviorRelay<Int> = .init(value: trip.price ?? 0)
-    private let showSuccess: PublishRelay<Void> = .init()
+    private let showPending: PublishRelay<Void> = .init()
     
     private let onSuccess: ((KTTicketAdapter) -> Void)
     
@@ -51,13 +52,15 @@ private extension KTOrderViewModel {
         defaultLoading.accept(true)
         
         usersService.rxBuyTickets(
+            name: observableName.value ?? "",
+            phoneNumber: observablePhoneNumber.value ?? "",
             count: totalCount.value,
             totalPrice: totalPrice.value,
             trip: trip
         )
             .subscribe(onSuccess: { [weak self] ticket in
                 guard let self = self else { return }
-                self.showSuccess.accept(())
+                self.showPending.accept(())
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { [weak self] in
                     guard let self = self else { return }
                     self.defaultDismissViewController.accept(.init(animated: true, completion: { [weak self] in
@@ -77,6 +80,8 @@ extension KTOrderViewModel: KTViewModelProtocol {
     
     struct Input {
         
+        let name: Observable<String>
+        let phoneNumber: Observable<String>
         let decCount: Observable<Void>
         let incCount: Observable<Void>
         let order: Observable<Void>
@@ -87,10 +92,18 @@ extension KTOrderViewModel: KTViewModelProtocol {
         let trip: Driver<KTTripAdapter>
         let totalCount: Driver<Int>
         let totalPrice: Driver<Int>
-        let showSuccess: Driver<Void>
+        let showPending: Driver<Void>
     }
     
     func transform(input: Input) -> Output {
+        input.name
+            .bind(to: observableName)
+            .disposed(by: disposeBag)
+        
+        input.phoneNumber
+            .bind(to: observablePhoneNumber)
+            .disposed(by: disposeBag)
+        
         input.decCount
             .bind(onNext: { [unowned self] in
                 handleDecCount()
@@ -113,7 +126,7 @@ extension KTOrderViewModel: KTViewModelProtocol {
             trip: .just(trip),
             totalCount: totalCount.asDriverOnErrorJustComplete(),
             totalPrice: totalPrice.asDriverOnErrorJustComplete(),
-            showSuccess: showSuccess.asDriverOnErrorJustComplete()
+            showPending: showPending.asDriverOnErrorJustComplete()
         )
     }
 }

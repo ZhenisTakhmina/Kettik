@@ -44,8 +44,8 @@ private extension KTSearchTripsViewModel {
 extension KTSearchTripsViewModel: KTViewModelProtocol {
     
     struct Input {
-        
         let search: Observable<String?>
+        let selectTrip: Observable<KTTripAdapter>
     }
     
     struct Output {

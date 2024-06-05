@@ -180,7 +180,7 @@ struct KTHorizontalTripsViewPreview: PreviewProvider {
         KTPreview {
             
             let view: KTHorizontalTripsView = .init(
-                viewModel: .init(collection: .init(id: "1", name: "Welcome to Almaty", trips: ["DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU"], sortIndex: 0, style: .block))
+                viewModel: .init(collection: .init(id: "1", name: [:], trips: ["DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU", "DEq4eRUqmUoIfEfjjDXU"], sortIndex: 0, style: .block))
             )
             let screen: KTViewController = .init()
             screen.view.add(view) {

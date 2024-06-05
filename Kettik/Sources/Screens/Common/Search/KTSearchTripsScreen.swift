@@ -29,6 +29,8 @@ final class KTSearchTripsScreen: KTViewController {
         let view: UICollectionView = .init(frame: .zero, collectionViewLayout: layout)
         view.backgroundColor = .clear
         view.showsVerticalScrollIndicator = false
+        view.isUserInteractionEnabled = true
+        view.allowsSelection = true
         view.register(TripCell.self)
         view.dataSource = self
         view.delegate = self
@@ -44,7 +46,7 @@ final class KTSearchTripsScreen: KTViewController {
         $0.borderStyle = .none
         $0.font = KTFonts.SFProText.regular.font(size: 16)
         $0.textColor = KTColors.Text.primary.color
-        $0.attributedPlaceholder = .init(string: "Search text", attributes: [.font: KTFonts.SFProText.regular.font(size: 16) as UIFont, .foregroundColor: KTColors.Text.secondary.color as UIColor])
+        $0.attributedPlaceholder = .init(string: KTStrings.Explore.searchText, attributes: [.font: KTFonts.SFProText.regular.font(size: 16) as UIFont, .foregroundColor: KTColors.Text.secondary.color as UIColor])
         $0.leftView = {
             let iconView: UIImageView = .init(image: KTImages.Icon.search.image).then {
                 $0.contentMode = .scaleAspectFit
@@ -99,7 +101,8 @@ final class KTSearchTripsScreen: KTViewController {
             .disposed(by: disposeBag)
         
         let input: KTSearchTripsViewModel.Input = .init(
-            search: searchField.rx.text.asObservable()
+            search: searchField.rx.text.asObservable(),
+            selectTrip: selectTrip.asObservable()
         )
         let output: KTSearchTripsViewModel.Output = viewModel.transform(input: input)
         

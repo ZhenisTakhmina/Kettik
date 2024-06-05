@@ -13,7 +13,7 @@ final class KTPRofileSettingsScreen: KTScrollableViewController {
     private let viewModel: KTPRofileSettingsViewModel = .init()
     
     private let fullNameView: KTInputView = .init(title: KTStrings.Common.fullName)
-    private let saveButton: KTPrimaryButton = .init(title: "Save")
+    private let saveButton: KTPrimaryButton = .init(title: KTStrings.Profile.save)
     
     override func setupViews() {
         super.setupViews()

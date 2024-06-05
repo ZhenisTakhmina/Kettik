@@ -21,13 +21,14 @@ final class KTOrderScreen: KTViewController {
         $0.numberOfLines = 0
         $0.textColor = KTColors.Text.primary.color
     }
-    
+    private let nameTextView: KTInputView = .init(title: "Name")
+    private let phoneNumber: KTInputView = .init(title: "Phone number")
     private let countControl: KTCountControl = .init()
     private let totalPriceLabel: UILabel = .init().then {
         $0.textColor = KTColors.Text.primary.color
         $0.font = KTFonts.SFProText.heavy.font(size: 32)
     }
-    private let purchaseButton: KTPrimaryButton = .init(title: "Make purchase")
+    private let purchaseButton: KTPrimaryButton = .init(title: KTStrings.Ticket.makePurchase)
     
     init(viewModel: KTOrderViewModel) {
         self.viewModel = viewModel
@@ -88,6 +89,8 @@ final class KTOrderScreen: KTViewController {
         bindDefaultTriggers(forViewModel: viewModel)
         
         let input: KTOrderViewModel.Input = .init(
+            name: nameTextView.textField.rx.text.orEmpty.asObservable(),
+            phoneNumber: phoneNumber.textField.rx.text.orEmpty.asObservable(),
             decCount: countControl.decButton.rx.tap.mapToVoid(),
             incCount: countControl.incButton.rx.tap.mapToVoid(),
             order: purchaseButton.rx.tap.mapToVoid()
@@ -108,23 +111,27 @@ final class KTOrderScreen: KTViewController {
         
         output.trip
             .drive(onNext: { [unowned self] trip in
-                titleLabel.text = trip.name
+                titleLabel.text = trip.name?[KTTripAdapter.shared]
             })
             .disposed(by: disposeBag)
         
-        output.showSuccess
-            .drive(onNext: { [weak self] in
-                self?.progressView.showSuccess()
+        output.showPending
+            .drive(onNext: {[weak self] in
+                self?.progressView.showPending()
             })
             .disposed(by: disposeBag)
+        
+         }
     }
-}
+
 
 private extension KTOrderScreen {
     
     func getContainerStackView() -> UIStackView {
         .init(arrangedSubviews: [
             titleLabel,
+            nameTextView,
+            phoneNumber,
             countControl,
             UIStackView(arrangedSubviews: [
                 UILabel().then {
@@ -137,6 +144,7 @@ private extension KTOrderScreen {
                 $0.axis = .vertical
                 $0.alignment = .center
                 $0.spacing = 2
+                $0.setCustomSpacing(10, after: phoneNumber)
             },
             purchaseButton
         ]).then {
@@ -159,10 +167,10 @@ fileprivate final class ProgressView: KTView {
     
     private let contentView: KTView = .init(backgroundColor: KTColors.Brand.accent.color)
     
-    private let successLabel: UILabel = .init().then {
+    private let pendingLabel: UILabel = .init().then {
         $0.font = KTFonts.SFProText.heavy.font(size: 32)
         $0.textColor = .white
-        $0.text = "Purchased"
+        $0.text = KTStrings.Ticket.pending
         $0.alpha = 0
         $0.transform = .init(translationX: 0, y: 100)
     }
@@ -185,20 +193,20 @@ fileprivate final class ProgressView: KTView {
             $0.top.equalToSuperview().offset(20)
             $0.size.equalTo(56)
         })
-        add(successLabel, {
+        add(pendingLabel, {
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(32)
         })
     }
     
-    func showSuccess() {
+    func showPending() {
         UIView.animate(withDuration: 0.24, animations: {
             self.spinnerView.transform = .init(scaleX: 0.2, y: 0.2)
             self.spinnerView.alpha = 0
-            self.headerView.tintColor = KTColors.Status.success.color
-            self.contentView.layer.backgroundColor = KTColors.Status.success.color.cgColor
-            self.successLabel.transform = .identity
-            self.successLabel.alpha = 1
+            self.headerView.tintColor = KTColors.Status.pending.color
+            self.contentView.layer.backgroundColor = KTColors.Status.pending.color.cgColor
+            self.pendingLabel.transform = .identity
+            self.pendingLabel.alpha = 1
         })
     }
     
@@ -226,15 +234,16 @@ struct KTOrderScreenPreview: PreviewProvider {
                 viewModel: .init(
                     trip: .init(
                         id: "1",
-                        name: "Big lake",
-                        description: "Asdakdasjd lasdk ljas",
+                        name: ["big lake":"Big lake"],
+                        description: ["big lake":"Big lake"],
                         thumbnailURL: nil,
+                        imagesURL: nil,
                         location: nil,
                         price: 10000,
                         formattedPrice: "10000",
                         difficulty: .hard, 
                         date: "7 May", 
-                        duration: "7-8 hours/6 km"
+                        duration: ["big lake":"Big lake"]
                     ),
                     onSuccess: { _ in }
                 )

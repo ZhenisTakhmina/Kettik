@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 final class KTTripCellView: KTView {
     
@@ -21,12 +22,14 @@ final class KTTripCellView: KTView {
     
     let nameLabel: UILabel = .init().then {
         $0.textColor = .white
+        $0.numberOfLines = 0
         $0.font = KTFonts.SFProText.bold.font(size: 12)
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
     }
     
     let locationLabel: UILabel = .init().then {
         $0.textColor = .white
+        $0.textAlignment = .left
         $0.font = KTFonts.SFProText.regular.font(size: 10)
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
     }
@@ -101,9 +104,10 @@ final class KTTripCellView: KTView {
 extension KTTripCellView {
     
     func set(trip: KTTripAdapter) {
+        
         thumbnailView.setImage(with: trip.thumbnailURL)
-        nameLabel.text = trip.name
-        locationView.set(text: trip.location)
+        nameLabel.text = trip.name?[KTTripAdapter.shared]
+        locationView.set(text: trip.location?[KTTripAdapter.shared])
         priceLabel.text = trip.formattedPrice
         if let difficulty = trip.difficulty {
             difficultyView.set(difficulty: difficulty)

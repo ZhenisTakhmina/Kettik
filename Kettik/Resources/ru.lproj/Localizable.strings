@@ -34,10 +34,12 @@
 "tab.profile" = "Профиль";
 
 "explore.title" = "Приветствуем в Алматы!";
+"explore.searchText" = "Поиск";
+
 "trip.slash_person" = "/ человек";
-"trip.about_tour" = "О Туре";
+"trip.about_tour" = "О туре";
 "trip.total_price" = "Итоговая цена";
-"trip.book_now" = "Забронировать";
+"trip.book_now" = "Купить";
 "trip.difficulty.easy" = "Легкий";
 "trip.difficulty.hard" = "Трудный";
 "trip.difficulty.medium" = "Средний";
@@ -49,3 +51,18 @@
 "profile.faq" = "Вопросы & Ответы";
 "profile.social_media_title" = "Мы в социальных сетях :)";
 "profile.sign_out" = "Выйти";
+"profile.save" = "Сохранить";
+
+"ticket.date" = "ДАТА";
+"ticket.count" = "КОЛИЧЕСТВО";
+"ticket.trip" = "ПОЕЗДКА";
+"ticket.price" = "ЦЕНА";
+"ticket.ticket" = " билет";
+"ticket.make_purchase" = "Купить";
+"ticket.pending" = "В обработке";
+"ticket.purchased" = "Оплачен";
+"ticket.status" = "СТАТУС";
+"ticket.invalid" = "Не действителен";
+
+
+
