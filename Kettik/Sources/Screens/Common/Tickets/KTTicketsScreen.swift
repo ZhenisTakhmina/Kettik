@@ -113,7 +113,7 @@ fileprivate final class Cell: KTTableViewCell {
         ticketView.add(stackView, {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(12)
-            $0.trailing.equalToSuperview().inset(108)
+            $0.trailing.equalToSuperview().inset(107)
         })
     }
     
